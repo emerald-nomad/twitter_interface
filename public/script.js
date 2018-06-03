@@ -21,7 +21,7 @@ tweet.on('input', e => {
 let postTweet = tweet => {
     $.ajax({
         type: "POST",
-        url: "/tweet",
+        url: "/ajax_tweet",
         timeout: 2000,
         data: { tweet },
         success:  data => {

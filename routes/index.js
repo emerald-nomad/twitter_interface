@@ -7,7 +7,7 @@ router.get('/', (req,res) => {
     Twit_routes.getData().then(data => res.render('app',data));
 });
 
-router.post('/tweet', (req, res) => {
+router.post('/ajax_tweet', (req, res) => {
     let tweet = req.body.tweet;
     
     Twit_routes.postTweet(tweet).then(data => res.send(data));
