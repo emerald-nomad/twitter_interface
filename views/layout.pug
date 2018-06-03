@@ -3,12 +3,14 @@ html(lang="en")
   head
     title Twitter Client
     link(rel='stylesheet', href='/static/css/global.css')
-  body
-    header
-      include header.pug
-    block main
-    footer
-      include tweet.pug
-    script(src="https://code.jquery.com/jquery-3.3.1.min.js")
-    script()
-      include ../public/script.js
+  block error
+    body
+      header
+        include header.pug
+      main
+        block main
+      footer
+        include tweet.pug
+      script(src="https://code.jquery.com/jquery-3.3.1.min.js")
+      script()
+        include ../public/script.js

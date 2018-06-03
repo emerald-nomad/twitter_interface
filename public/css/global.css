@@ -2500,3 +2500,27 @@ input[type="reset"],
 input[type="button"] {
   padding: 16px 20px;
 }
+
+.error_body {
+  padding: 0;
+  color: #1da1f2;
+  background-color: #1da1f2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error_svg_container {
+  /* margin: 0 auto; */
+  height: 200px;
+  width: 200px;
+}
+error_svg_container svg {
+  height: 100%;
+  width: 100%;
+}
+.error {
+  color: white;
+  /* margin: 0 auto; */
+}
