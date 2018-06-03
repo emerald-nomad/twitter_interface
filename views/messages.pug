@@ -1,32 +1,21 @@
+- var user = messages[0].user;
 .grid-33
     .app--section
         ul(class="app--message--list")
             li
                 h3 Conversation with 
-                    a Jill Spore
+                    a #{user.name}
                 ul(class="app--message--conversation")
-                    li(class="app--message")
-                        div(class="app--avatar" style="background-image: url(static/images/f-spore.png)")
-                            img(src="static/images/f-spore.png")
-                        p(class="app--message--text") How are things?
-                        p(class="app--message--timestamp") 3 hours ago
-                    li(class="app--message--me")
-                        div(class="app--avatar" style="background-image: url(static/images/m-spore.png)")
-                            img(src="static/images/m-spore.png")
-                        p(class="app--message--text") Great! How about you? Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        p(class="app--message--timestamp") 2 hours ago
-                    li(class="app--message")
-                        div(class="app--avatar" style="background-image: url(static/images/f-spore.png)")
-                            img(src="static/images/f-spore.png")
-                        p(class="app--message--text") Fantastic! You wanna grab lunch?
-                        p(class="app--message--timestamp") 2 hours ago
-                    li(class="app--message--me")
-                        div(class="app--avatar" style="background-image: url(static/images/m-spore.png)")
-                            img(src="static/images/m-spore.png")
-                        p(class="app--message--text") Totes mcgotes. How about Mackey's?
-                        p(class="app--message--timestamp") 1 hour ago
-                    li(class="app--message")
-                        div(class="app--avatar" style="background-image: url(static/images/f-spore.png)")
-                            img(src="static/images/f-spore.png")
-                        p(class="app--message--text") Aww yeah.. I'm craving a Triple Quarter Mack!
-                        p(class="app--message--timestamp") 1 hour ago
+                    each message in messages[0].conversation
+                        if message.type == "recieved"
+                            li(class="app--message")
+                                div(class="app--avatar" style=`background-image: url(${user.profile_img})`)
+                                    img(src=user.profile_img)
+                                p(class="app--message--text") #{message.text}
+                                p(class="app--message--timestamp") #{message.date}
+                        else if message.type == 'sent'
+                            li(class="app--message--me")
+                                div(class="app--avatar" style=`background-image: url(${account_user.profile_img})`)
+                                    img(src=account_user.profile_img)
+                                p(class="app--message--text") #{message.text}
+                                p(class="app--message--timestamp") #{message.date}
