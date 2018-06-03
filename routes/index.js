@@ -3,8 +3,10 @@ const router = express.Router();
 const twit = require('./twit.js');
 let Twit_routes = new twit;
 
-router.get('/', (req,res) => {
-    Twit_routes.getData().then(data => res.render('app',data));
+router.get('/', (req,res,next) => {
+    Twit_routes.getData()
+        .then(data => res.render('app',data))
+        .catch(err => next(err));
 });
 
 router.post('/ajax_tweet', (req, res) => {
