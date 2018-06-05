@@ -1,6 +1,9 @@
+// ==========================================================================
+// Tweets
+// ==========================================================================
 const tweet = $('#tweet-textarea');
-const charMax = parseInt($('#tweet-char').text());
 const tweetform = $('#tweet-form');
+const charMax = parseInt($('#tweet-char').text());
 let charCount = $('#tweet-char');
 
 tweetform.on('submit', e => {
@@ -76,4 +79,57 @@ let addTweet = data => {
             </ul>
         </li>
     `)
+}
+
+
+// ==========================================================================
+// Follow
+// ==========================================================================
+const friendBtn = $('.friend');
+
+friendBtn.on('click', e => {
+    const btn = $(e.target);
+    const id = e.target.id;
+
+    if (btn.hasClass('unfollow')) {
+        unfollow(id);
+        btn.removeClass('unfollow');
+        btn.addClass('follow');
+        btn.text('Follow');
+    } else if (btn.hasClass('follow')) {
+        follow(id);
+        btn.removeClass('follow');
+        btn.addClass('unfollow');
+        btn.text('Unfollow');
+    }
+})
+
+let follow = id => {
+    $.ajax({
+        type: "POST",
+        url: "/ajax_follow",
+        timeout: 2000,
+        data: { id },
+        success: message => {
+            console.log(message);
+        },
+        error: function (jqXHR, textStatus, err) {
+            console.log('text status ' + textStatus + ', err ' + err)
+        }
+    });
+}
+
+let unfollow = id => {
+    $.ajax({
+        type: "POST",
+        url: "/ajax_unfollow",
+        timeout: 2000,
+        data: { id },
+        success: message => {
+            console.log(message);
+        },
+        error: function (jqXHR, textStatus, err) {
+            console.log('text status ' + textStatus + ', err ' + err)
+        }
+    });
 }

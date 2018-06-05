@@ -9,6 +9,16 @@ router.get('/', (req,res,next) => {
         .catch(err => next(err));
 });
 
+router.post('/ajax_follow', (req, res) => {
+    let id = req.body.id;
+    Twit_routes.follow(id).then(message => res.send(message));
+});
+
+router.post('/ajax_unfollow', (req, res) => {
+    let id = req.body.id;
+    Twit_routes.unfollow(id).then(message => res.send(message));
+});
+
 router.post('/ajax_tweet', (req, res) => {
     let tweet = req.body.tweet;
     

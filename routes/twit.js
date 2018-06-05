@@ -191,6 +191,31 @@ let Twit_routes = class {
         });
     }
 
+    unfollow(id) {
+        return new Promise((resolve, reject) => {
+            this.T.post('friendships/destroy', {user_id: id}, (err, data, res) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(`You've unfollowed ${data.name}.`);
+                }
+            });
+        });
+    }
+
+    follow(id) {
+        return new Promise((resolve, reject) => {
+            this.T.post('friendships/create', { user_id: id }, (err, data, res) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    console.log(data);
+                    resolve(`You've followed ${data.name}.`);
+                }
+            });
+        });
+    }
+
     postTweet(tweet) {
         return new Promise((resolve, reject) => {
             let tweetData = { user: this.user, tweet};
