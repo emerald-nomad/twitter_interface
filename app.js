@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-
+const routes = require('./routes');
 const app = express();
 
 app.use(bodyParser.json()); 
@@ -11,7 +11,6 @@ app.use('/static', express.static('public'));
 
 app.set('view engine', 'pug');
 
-const routes = require('./routes');
 app.use(routes);
 
 app.use((err, req, res, next) => {
