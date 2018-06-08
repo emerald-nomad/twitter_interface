@@ -2501,6 +2501,38 @@ input[type="button"] {
   padding: 16px 20px;
 }
 
+.login_body {
+  padding: 0;
+  background-color: #a86cc6;
+  display: flex;
+  justify-content: center;
+}
+
+.login_form {
+  width: 25%;
+  margin: auto;
+  text-align: center;
+}
+
+.login_form h1 {
+  color: white;
+}
+
+.login_btn {
+  color: #a86cc6;
+  background-color: white;
+  box-shadow: none;
+  width: 100%;
+  font-size: 1.5em;
+  transition-duration: .5s;
+}
+
+.login_btn:hover {
+  box-shadow: none;
+  color: #a86cc6;
+  transform: scale(1.1);
+}
+
 .error_body {
   padding: 0;
   color: #1da1f2;
@@ -2512,7 +2544,6 @@ input[type="button"] {
 }
 
 .error_svg_container {
-  /* margin: 0 auto; */
   height: 200px;
   width: 200px;
 }
@@ -2522,5 +2553,4 @@ error_svg_container svg {
 }
 .error {
   color: white;
-  /* margin: 0 auto; */
 }
