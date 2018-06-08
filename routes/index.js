@@ -1,11 +1,49 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
+const configs = require('../config.js');
 const twit = require('./twit.js');
-let Twit_routes = new twit;
+let Twit_routes;
 
-router.get('/', (req,res,next) => {
+router.get('/', (req, res) => {
+    if (req.user) {
+        res.redirect('/home');
+    } else {
+        res.redirect('/login');
+    }
+})
+
+router.get('/login', (req, res) => {
+    res.render('login');
+});
+
+router.get('/login/twitter', passport.authenticate('twitter'));
+
+router.get('/login/twitter/return', 
+    passport.authenticate('twitter', { failureRedirect: '/login' }),
+    (req, res) => {
+        Twit_routes = new twit({
+            consumer_key: configs.consumer_key,
+            consumer_secret: configs.consumer_secret,
+            access_token: req.user.token,
+            access_token_secret: req.user.tokenSecret,
+        });
+        console.log("/login/twitter/return",req.user);
+        res.redirect('/home');
+    }
+);
+
+router.get('/logout', (req, res) => {
+    console.log("/logout", req.user);
+    req.logOut();
+    res.redirect('/login');
+});
+
+router.get('/home', (req, res, next) => {
     Twit_routes.getData()
-        .then(data => res.render('app',data))
+        .then(data => {
+            res.render('app', data)
+        })
         .catch(err => next(err));
 });
 

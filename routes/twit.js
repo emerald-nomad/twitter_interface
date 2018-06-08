@@ -1,15 +1,14 @@
 const Twit = require('twit');
 const moment = require('moment');
-const configs = require('../config.js');
+const decode = require('unescape');
 
 let Twit_routes = class {
-    constructor() {
-        
+    constructor(args) {
         this.T = new Twit({
-            consumer_key: configs.consumer_key,
-            consumer_secret: configs.consumer_secret,
-            access_token: configs.access_token,
-            access_token_secret: configs.access_token_secret,
+            consumer_key: args.consumer_key,
+            consumer_secret: args.consumer_secret,
+            access_token: args.access_token,
+            access_token_secret: args.access_token_secret,
         });
 
         this.getAccountUser()
@@ -20,7 +19,7 @@ let Twit_routes = class {
     async getData() {
         let data = {};
         try {
-            data.account_user = await this.user;
+            data.account_user = await this.getAccountUser();
             data.friends = await this.getFriends();
             data.tweets = await this.getTweets();
             data.messages = await this.getMessages();
@@ -119,11 +118,10 @@ let Twit_routes = class {
                     for (let tweet of data) {
                         let tweetData = {};
                         let date = new Date(tweet.created_at);
-
                         tweetData.name = tweet.user.name;
                         tweetData.screen_name = tweet.user.screen_name;
                         tweetData.profile_img = tweet.user.profile_image_url_https;
-                        tweetData.text = tweet.text;
+                        tweetData.text = decode(tweet.text)
                         tweetData.favorite_count = tweet.favorite_count;
                         tweetData.retweet_count = tweet.retweet_count;
                         tweetData.date = this.formatDate(date);
