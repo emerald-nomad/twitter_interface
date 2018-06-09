@@ -13,7 +13,7 @@ passport.use(new Strategy({
     consumerKey: process.env.CONSUMER_KEY,
     consumerSecret: process.env.CONSUMER_SECRET,
     userAuthorizationURL: 'https://api.twitter.com/oauth/authenticate?force_login=true',
-    callbackURL: 'https://jt-twitter-interface.herokuapp.com/login/twitter/return'
+    callbackURL: 'http://127.0.0.1:3000/login/twitter/return'
     }, (token, tokenSecret, profile, cb) => {
         return cb(null, {token, tokenSecret});
     })
