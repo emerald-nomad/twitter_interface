@@ -1,4 +1,3 @@
-const configs = require('./config.js');
 const express = require('express');
 const compression = require('compression');
 const helmet = require('helmet');

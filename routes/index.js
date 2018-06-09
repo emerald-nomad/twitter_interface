@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const configs = require('../config.js');
 const twit = require('./twit.js');
 let Twit_routes;
 
