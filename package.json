@@ -2,9 +2,6 @@
   "name": "twitter_interface",
   "version": "1.0.0",
   "description": "",
-  "engines": {
-    "node": "8.11.2"
-  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,12 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "compression": "^1.7.2",
     "cookie-parser": "^1.4.3",
-    "cookie-session": "^2.0.0-beta.3",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
-    "helmet": "^3.12.1",
     "moment": "^2.22.2",
     "passport": "^0.4.0",
     "passport-twitter": "^1.0.4",

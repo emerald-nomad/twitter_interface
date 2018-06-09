@@ -23,8 +23,10 @@ let Twit_routes = class {
             data.friends = await this.getFriends();
             data.tweets = await this.getTweets();
             data.messages = await this.getMessages();
+            console.log("getData() Successful");
             return Promise.resolve(data);
         } catch(err) {
+            console.log("getData() Unsuccessful");
             return Promise.reject(err);
         }
     }
@@ -33,6 +35,7 @@ let Twit_routes = class {
         return new Promise((resolve, reject) => {
             this.T.get('account/verify_credentials',(err,data,res) => {
                 if (err) {
+                    console.log("getAccountUser() Unsuccessful");
                     reject(err);
                 } else {
                     let user = {};
@@ -43,6 +46,7 @@ let Twit_routes = class {
                     user.profile_img = data.profile_image_url_https;
                     user.profile_banner = data.profile_banner_url;
                     user.following = data.friends_count;
+                    console.log("getAccountUser() Successful");
                     resolve(user);
                 }
             });
@@ -54,6 +58,7 @@ let Twit_routes = class {
             this.T.get('users/lookup',{ user_id: ids}, (err, data, res) => {
                 if (err) {
                     reject(err);
+                    console.log("getUsers() Unsuccessful");
                 } else {
                     let users = [];
 
@@ -66,6 +71,7 @@ let Twit_routes = class {
 
                         users.push(userInfo);
                     }
+                    console.log("getUsers() Successful");
                     resolve(users);
                 }// end else
                 
@@ -78,6 +84,7 @@ let Twit_routes = class {
         return new Promise((resolve, reject) => {
             this.T.get('friends/list', { count: 5 }, (err, data, res) => {
                 if (err) {
+                    console.log("getFriends() Unsuccessful");
                     reject(err);
                 } else {
                     let users = [];
@@ -92,6 +99,7 @@ let Twit_routes = class {
 
                         users.push(user);
                     }
+                    console.log("getFriends() Successful");
                     resolve(users);
                 }// end else
             });
@@ -103,6 +111,7 @@ let Twit_routes = class {
             this.T.get('statuses/home_timeline', { count: 5 }, (err, data, res) => {
                 if (err) {
                     reject(err);
+                    console.log("getTweets() Unsuccessful");
                 } else {
                     let tweets = [];
 
@@ -119,6 +128,7 @@ let Twit_routes = class {
 
                         tweets.push(tweetData);
                     }
+                    console.log("getTweets() Successful");
                     resolve(tweets);
                 }// end else
             });
@@ -129,6 +139,7 @@ let Twit_routes = class {
         return new Promise((resolve, reject) => {
             this.T.get('direct_messages/events/list', (err, data, res) => {
                 if (err) {
+                    console.log("getMessages() Unsuccessful");
                     reject(err);
                 } else {
                     let users = new Set();
@@ -183,6 +194,7 @@ let Twit_routes = class {
                             data.forEach((user, index) => {
                                 conversations[index].user = user;
                             });
+                            console.log("getMessages() Successful");
                             resolve(conversations);
                         });
                 } // end else
@@ -208,8 +220,10 @@ let Twit_routes = class {
         return new Promise((resolve, reject) => {
             this.T.post('friendships/create', { user_id: id }, (err, data, res) => {
                 if (err) {
+                    console.log("follow() Unsuccessful");
                     reject(err);
                 } else {
+                    console.log("follow() Successful");
                     resolve(`You've followed ${data.name}.`);
                 }
             });
@@ -221,8 +235,10 @@ let Twit_routes = class {
             let tweetData = { user: this.user, tweet};
             this.T.post('statuses/update', { status: tweet }, (err, data, res) => {
                 if (err) {
+                    console.log("postTweet() Unsuccessful");
                     reject(err);
                 } else {
+                    console.log("postTweet() Successful");
                     resolve(tweetData);
                 }
             });
