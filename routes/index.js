@@ -22,8 +22,8 @@ router.get('/login/twitter/return',
     passport.authenticate('twitter', { failureRedirect: '/login' }),
     (req, res) => {
         Twit_routes = new twit({
-            consumer_key: configs.consumer_key,
-            consumer_secret: configs.consumer_secret,
+            consumer_key: process.env.CONSUMER_KEY,
+            consumer_secret: process.env.CONSUMER_SECRET,
             access_token: req.user.token,
             access_token_secret: req.user.tokenSecret,
         });
